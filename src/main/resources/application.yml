@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: pumper
+
+pumper:
+  source:
+    jdbc-url: jdbc:mysql://172.17.1.3:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true&tinyInt1isBit=false
+    driver-class-name: com.mysql.jdbc.Driver
+    account:
+      enable-account: true
+      username: tangyibo
+      password: 123456
+    fetch-size : 10000
+    schema-name: 'test'
+    table-includes:
+      - test_50w_data
+      - test_200w_data
+      - test_8000w_data
+    table-excludes:
+  target:
+    jdbc-url: jdbc:hive2://192.168.122.101:10000
+    driver-class-name: org.apache.hive.jdbc.HiveDriver
+    account:
+      enable-account: false
+      username: hdfs
+      password: 123456
+    schema-name: 'demo'
+    hadoop-hdfs:
+      hdfs-url: hdfs://192.168.122.103:8020
+      username: 'hdfs'
+      hdfs-site-xml-file-path: "D:/cdh/hdfs-site.xml"
+      core-site-xml-file-path: "D:/cdh/core-site.xml"
+    kerberos:
+      enable-kerberos: false
+      kerberos-principal : "hdfs/node01@CDH"
+      kerberos-keytab-file-path : "D:/cdh/hdfs.keytab"
+      kerberos-conf-file-path : "D:/cdh/krb5.conf"
